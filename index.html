@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Train Scheduler</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron text-center bg-dark text-light">
+      <h1>Train Scheduler</h1>
+    </div>
+    <div class="card mb-4 border-dark">
+      <h5 class="card-header">Current Train Schedule</h5>
+      <div class="card-body">
+        <h5 class="card-title">Newark Penn Station Departures</h5>
+        <h6 class="card-subtitle mb-2 text-muted" id="time-display"></h6>
+        <!-- begin of the table -->
+        <table class="table table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <!-- departs === Next arrival ||  Status === Minutes away -->
+              <!-- We changed few things to make more real -->
+              <th scope="col">Departs</th>
+              <th scope="col">Train Name</th>
+              <th scope="col">Track</th>
+              <th scope="col">Destination</th>
+              <th scope="col">Frequency(min)</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="list-trains">
+            <!-- end table -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- new train form -->
+    <div class="card mb-4 border-dark">
+      <div class="card-header text-capitalize">
+        Add a train
+      </div>
+      <div class="card-body">
+        <form role="form">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="name-input">Train name:</label>
+              <input class="form-control" id="name-input" type="text">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="role-input">Destination:</label>
+              <input class="form-control" id="destination-input" type="text">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="track-input">Select Track </label>
+              <select class="form-control" id="track-input" >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="start-input">First train time(HH:mm - military time):</label>
+              <input class="form-control" id="firstTrain-input" type="time">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="rate-input">Frequency:</label>
+              <input class="form-control" id="frequency-input" type="number">
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-lg btn-block" id="add-train" type="submit">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+
+  </div>
+  <!-- scripts section-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script src="assets/javascript/app.js"></script>
+  <!-- End script section -->
+</body>
+
+</html>
