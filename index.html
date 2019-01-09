@@ -22,7 +22,7 @@
         <h5 class="card-title">Newark Penn Station Departures</h5>
         <h6 class="card-subtitle mb-2 text-muted" id="time-display"></h6>
         <!-- begin of the table -->
-        <table class="table table-striped table-hover table-responsive">
+        <table class="table table-striped table-hover">
           <thead>
             <tr>
               <!-- departs === Next arrival ||  Status === Minutes away -->
@@ -63,7 +63,7 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="track-input">Select Track </label>
-              <select class="form-control" id="track-input" >
+              <select class="form-control" id="track-input">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -73,11 +73,30 @@
             </div>
             <div class="form-group col-md-4">
               <label for="start-input">First train time(HH:mm - military time):</label>
-              <input class="form-control" id="firstTrain-input" type="time">
+              <input class="form-control" id="firstTrain-input" type="text">
             </div>
             <div class="form-group col-md-4">
               <label for="rate-input">Frequency:</label>
               <input class="form-control" id="frequency-input" type="number">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text mr-2">Stops at</span>
+                </div>
+                <input class="form-control mr-2" id="stop1-input" type="text">
+                <input class="form-control mr-2" id="stop2-input" type="text">
+                <input class="form-control mr-2" id="stop3-input" type="text">
+                <input class="form-control mr-2" id="stop4-input" type="text">
+                <input class="form-control mr-2" id="stop5-input" type="text">
+                <input class="form-control mr-2" id="stop6-input" type="text">
+                <input class="form-control mr-2" id="stop7-input" type="text">
+                <input class="form-control mr-2" id="stop8-input" type="text">
+                <input class="form-control mr-2" id="stop9-input" type="text">
+                <input class="form-control mr-2" id="stop10-input" type="text">
+              </div>
             </div>
           </div>
 
@@ -86,14 +105,181 @@
       </form>
     </div>
   </div>
-
   </div>
+   <!-- modals section -->
+  <!-- begin display stops modal -->
+  <div class="modal fade" id="stops-modal" tabindex="-1" role="dialog" aria-labelledby="Update-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="stops-modal-title">This train makes the following stops</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="stops-modal-body">
+          <!-- modal body -->
+          <ul class="list-group" id="list-stop">
+            <!-- Content generated dynamically -->
+          </ul>
+          <!-- end body -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end display stops modal -->
+   <!-- begin update modal -->
+   <div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="Update-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="update-modal-title">Update train info</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="update-modal-body">
+          <!-- modal body -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="name-input">Train name:</label>
+              <input class="form-control" id="name-input" type="text">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="role-input">Destination:</label>
+              <input class="form-control" id="destination-input" type="text">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="track-input">Select Track </label>
+              <select class="form-control" id="track-input">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="start-input">First train time(HH:mm - military time):</label>
+              <input class="form-control" id="firstTrain-input" type="text">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="rate-input">Frequency:</label>
+              <input class="form-control" id="frequency-input" type="number">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text mr-2">Stops at</span>
+                </div>
+                <input class="form-control mr-2" id="stop1-input" type="text">
+                <input class="form-control mr-2" id="stop2-input" type="text">
+                <input class="form-control mr-2" id="stop3-input" type="text">
+                <input class="form-control mr-2" id="stop4-input" type="text">
+                <input class="form-control mr-2" id="stop5-input" type="text">
+                <input class="form-control mr-2" id="stop6-input" type="text">
+                <input class="form-control mr-2" id="stop7-input" type="text">
+                <input class="form-control mr-2" id="stop8-input" type="text">
+                <input class="form-control mr-2" id="stop9-input" type="text">
+                <input class="form-control mr-2" id="stop10-input" type="text">
+              </div>
+            </div>
+          </div>
+          <!-- end body -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end update modal -->
+   <!-- begin delete modal -->
+   <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="Update-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="delete-modal-title">Remove train</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="delete-modal-body">
+          <!-- modal body -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="name-input">Train name:</label>
+              <input class="form-control" id="name-input" type="text">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="role-input">Destination:</label>
+              <input class="form-control" id="destination-input" type="text">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="track-input">Select Track </label>
+              <select class="form-control" id="track-input">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="start-input">First train time(HH:mm - military time):</label>
+              <input class="form-control" id="firstTrain-input" type="text">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="rate-input">Frequency:</label>
+              <input class="form-control" id="frequency-input" type="number">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text mr-2">Stops at</span>
+                </div>
+                <input class="form-control mr-2" id="stop1-input" type="text">
+                <input class="form-control mr-2" id="stop2-input" type="text">
+                <input class="form-control mr-2" id="stop3-input" type="text">
+                <input class="form-control mr-2" id="stop4-input" type="text">
+                <input class="form-control mr-2" id="stop5-input" type="text">
+                <input class="form-control mr-2" id="stop6-input" type="text">
+                <input class="form-control mr-2" id="stop7-input" type="text">
+                <input class="form-control mr-2" id="stop8-input" type="text">
+                <input class="form-control mr-2" id="stop9-input" type="text">
+                <input class="form-control mr-2" id="stop10-input" type="text">
+              </div>
+            </div>
+          </div>
+          <!-- end body -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end display stops modal -->
   <!-- scripts section-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
   <script src="assets/javascript/app.js"></script>
   <!-- End script section -->
 </body>
