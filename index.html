@@ -16,13 +16,13 @@
     <div class="jumbotron text-center bg-dark text-light">
       <h1>Train Scheduler</h1>
     </div>
-    <div class="card mb-4 border-dark">
-      <h5 class="card-header">Current Train Schedule</h5>
+    <div class="card mb-4 border-info">
+      <h5 class="card-header bg-info">Current Train Schedule</h5>
       <div class="card-body">
         <h5 class="card-title">Newark Penn Station Departures</h5>
         <h6 class="card-subtitle mb-2 text-muted" id="time-display"></h6>
         <!-- begin of the table -->
-        <table class="table table-striped table-hover table-sm">
+        <table class="table table-striped table-hover table-responsive">
           <thead>
             <tr>
               <!-- departs === Next arrival ||  Status === Minutes away -->
@@ -33,6 +33,7 @@
               <th scope="col">Destination</th>
               <th scope="col">Frequency(min)</th>
               <th scope="col">Status</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody id="list-trains">
@@ -44,7 +45,7 @@
 
     <!-- new train form -->
     <div class="card mb-4 border-dark">
-      <div class="card-header text-capitalize">
+      <div class="card-header bg-dark text-light text-capitalize">
         Add a train
       </div>
       <div class="card-body">
@@ -80,7 +81,7 @@
             </div>
           </div>
 
-          <button class="btn btn-primary btn-lg btn-block" id="add-train" type="submit">Submit</button>
+          <button class="btn btn-outline-primary btn-lg btn-block" id="add-train" type="submit">Submit</button>
       </div>
       </form>
     </div>
