@@ -1,13 +1,11 @@
 $(document).ready(function () {
-  //display the current 
-  // Running Clock at the top
+  //display the running Clock at the top
   function runningClock() {
     time = moment().format("hh:mm:ss A");
     $("#time-display").text(time);
   }
   //  Call function with setInterval
   clock = setInterval(runningClock, 1000);
-
 
   //firebase link
   var config = {
@@ -49,9 +47,9 @@ $(document).ready(function () {
         //console.log(`Stop N:${i} - ${$(selector).val().trim()}`);
       }
     }
-
     // Console log each of the user inputs to confirm we are receiving them correctly
-    //console.log(`Train Name: ${newTrain.name} ||Dest: ${newTrain.destination} || Train Track: ${newTrain.track}|| First train Time: ${newTrain.firstTrain} || Frequency: ${newTrain.frequency}`);
+    //console.log(`Train Name: ${newTrain.name} ||Dest: ${newTrain.destination} 
+    //|| Train Track: ${newTrain.track}|| First train Time: ${newTrain.firstTrain} || Frequency: ${newTrain.frequency}`);
     // console.log(`Stops at: ${newTrain.stops.join("--")}`);
 
     //using push to add the data in firebase
@@ -64,8 +62,16 @@ $(document).ready(function () {
     //$("#track-input option:selected").val(),
     $("#firstTrain-input").val("");
     $("#frequency-input").val("");
-
-
+    $("#stop1-input").val(""); //stop10-input
+    $("#stop2-input").val("");
+    $("#stop3-input").val("");
+    $("#stop4-input").val("");
+    $("#stop5-input").val("");
+    $("#stop6-input").val("");
+    $("#stop7-input").val("");
+    $("#stop8-input").val("");
+    $("#stop9-input").val("");
+    $("#stop10-input").val("");
   });
 
   //lets handle the display of the content of the db
@@ -182,14 +188,22 @@ $(document).ready(function () {
     }
   });
 
-  //event listener for a click on update
+  //event listener for a click on update a train
   $(document).on("click", "#update", function (event) {
     //get the value of the key
     var key = $(this).attr("data-key");
-    //console.log(`Current Key:${key}`);
+    console.log(`Current Key:${key}`);
     //the train infos with the key 
+    //confirm-update
+      $(document).on("click", "#confirm-update", function (event) {
+
+      //update the train with the key
+     // database.ref("train-scheduler").child(ckey).remove();
+     //still working on it :))
+      
+    });
   });
-  //event listener for a click on delete
+  //event listener for a click on delete a train
   $(document).on("click", "#delete", function (event) {
     //get the value of the key
     var ckey = $(this).attr("data-key");
@@ -203,9 +217,11 @@ $(document).ready(function () {
 
       //delete the train with the key
       database.ref("train-scheduler").child(ckey).remove();
-      //delete the row from the table
 
+      //delete the row from the table
       $($dom).parents('tr').remove();
+
+      //get rid of the modal
       $("#delete-modal").modal('hide');
     });
 
