@@ -133,7 +133,9 @@ $(document).ready(function () {
       .attr("data-target", "#update-modal");
     buttonDelete
       .attr("id", "delete")
-      .attr("data-key", cdataKey);
+      .attr("data-key", cdataKey)
+      .attr("data-toggle", "modal")
+      .attr("data-target", "#delete-modal");
 
     //append the buttons to the row
     var rowActions = $("<td>").append(buttonStops, buttonUpdate, buttonDelete).appendTo(newRow);
@@ -149,8 +151,8 @@ $(document).ready(function () {
   //event listener for a click on the button stops to see the train stops
   $(document).on("click", "#stops", function (event) {
     //clear the ul list of stops
-    $("#list-stop").empty();  
-    
+    $("#list-stop").empty();
+
     //get the value of the key as current key
     var ckey = $(this).attr("data-key");
     console.log(`Current Key:${ckey}`);
@@ -192,10 +194,20 @@ $(document).ready(function () {
     //get the value of the key
     var ckey = $(this).attr("data-key");
     //console.log(`Current Key:${key}`);
-    //delete the train with the key 
-    database.ref("train-scheduler").child(ckey).remove();
-    //
-    $(this).parents('tr').remove();
+
+    //get the value of the dom
+    var $dom=$(this);
+
+    //confirm delete
+    $(document).on("click", "#confirm-delete", function (event) {
+
+      //delete the train with the key
+      database.ref("train-scheduler").child(ckey).remove();
+      //delete the row from the table
+
+      $($dom).parents('tr').remove();
+      $("#delete-modal").modal('hide');
+    });
 
   });
 
