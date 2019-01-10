@@ -1,8 +1,13 @@
 $(document).ready(function () {
   //display the current 
-  var d = new Date();
-  var n = d.toLocaleTimeString();
-  $("#time-display").text(moment().format('LTS'));
+  // Running Clock at the top
+  function runningClock() {
+    time = moment().format("hh:mm:ss A");
+    $("#time-display").text(time);
+  }
+  //  Call function with setInterval
+  clock = setInterval(runningClock, 1000);
+
 
   //firebase link
   var config = {
@@ -128,9 +133,7 @@ $(document).ready(function () {
       .attr("data-target", "#update-modal");
     buttonDelete
       .attr("id", "delete")
-      .attr("data-key", cdataKey)
-      .attr("data-toggle", "modal")
-      .attr("data-target", "#delete-modal");
+      .attr("data-key", cdataKey);
 
     //append the buttons to the row
     var rowActions = $("<td>").append(buttonStops, buttonUpdate, buttonDelete).appendTo(newRow);
@@ -141,27 +144,59 @@ $(document).ready(function () {
   }, function (errorOject) {
     console.log("The read failed: " + errorObject.code);
   });
-  //event listener for a click on stops
-  $(document).on("click", "#stops",function (event) {
-    //get the value of the key
-    var key = $(this).attr("data-key");
-    //console.log(`Current Key:${key}`);
-    //the train infos with the key 
+
+
+  //event listener for a click on the button stops to see the train stops
+  $(document).on("click", "#stops", function (event) {
+    //clear the ul list of stops
+    $("#list-stop").empty();  
+    
+    //get the value of the key as current key
+    var ckey = $(this).attr("data-key");
+    console.log(`Current Key:${ckey}`);
+
+    //get the train infos with the key 
+    var cTrain;
+    database.ref("train-scheduler").child(ckey).on("value", function (snapshot) {
+      console.log(snapshot.val());
+      cTrain = snapshot.val();
+    });
+    //console.log(cTrain);
+    //get only the array of stops into our var stop
+    var stops = cTrain.stops;
+    //$("#stops-modal-body").text(stops);
+
+    // check if trains stop were added to this train
+    if (stops.length > 0) {
+      //for loop to create the list item to fetch the ul list-stop 
+      for (var i = 0; i < stops.length; i++) {
+        var liStop = $("<li>");
+        liStop.addClass("list-group-item list-group-item-info");
+        liStop.text(stops[i]);
+        $("#list-stop").append(liStop);
+      }
+    } else {
+      $("#stops-modal-body").text("No data available at this time");;
+    }
   });
-  
+
   //event listener for a click on update
-  $(document).on("click", "#update",function (event) {
+  $(document).on("click", "#update", function (event) {
     //get the value of the key
     var key = $(this).attr("data-key");
     //console.log(`Current Key:${key}`);
     //the train infos with the key 
   });
   //event listener for a click on delete
-  $(document).on("click", "#delete",function (event) {
+  $(document).on("click", "#delete", function (event) {
     //get the value of the key
-    var key = $(this).attr("data-key");
+    var ckey = $(this).attr("data-key");
     //console.log(`Current Key:${key}`);
-    //the train infos with the key 
+    //delete the train with the key 
+    database.ref("train-scheduler").child(ckey).remove();
+    //
+    $(this).parents('tr').remove();
+
   });
 
 });
